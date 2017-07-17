@@ -1,0 +1,22 @@
+{% extends 'blogs/base.html' %}
+{% block content %}
+  <div class="block-blog">
+      <h2 class="sub-title">Our Blog</h2>
+      <div class="wrap">
+          {% for post in posts %}
+          <div class="blog-item">
+              <div class="left-group">
+                  <a href="{% url 'post_detail' pk=pk.post%}">
+                      <span class="thumb-blog"><img src="../../static/img/corgi-6.jpg" alt="blog"></span>
+                      <span class="blog-title">{{ post.title }}</span>
+                  </a>
+              </div>
+              <div class="right-group">
+                  <span class="blog-date">{{ post.published_date }}</span>
+                  <p>{{ post.text }}</p>
+              </div>
+          </div>
+          {% endfor %}
+      </div>
+  </div>
+{% endblock content %}

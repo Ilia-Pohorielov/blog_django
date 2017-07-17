@@ -18,6 +18,6 @@
         </div>
         {% endfor %}
     </div>
-    <a href="blog.html" class="btn-blog" target="_blank">Перейти на блоги</a>
+    <a href="{% url 'post_new' %}" class="btn-blog" target="_blank">Добавить запись</a>
 </div>
 {% endblock content %}
