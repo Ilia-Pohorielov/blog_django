@@ -1,6 +1,6 @@
 *.idea
 *.pyc
 __pycache__
-myvenv
+blog_venv
 db.sqlite3
 .DS_Store
