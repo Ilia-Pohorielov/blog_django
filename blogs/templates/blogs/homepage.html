@@ -60,6 +60,21 @@
     <a href="#anchor-title" class="anchor">Anchor</a>
 </header>
 <main>
+    <div class="blogs">
+        {% for post in posts %}
+            <div class="blog">
+                <div class="publish">
+                    {{ post.published_date }}
+                </div>
+                <div class="title">
+                    {{post.title}}
+                </div>
+                <div class="description">
+                    {{post.text}}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
     <div class="wrap">
         <div class="block-description" id="anchor-title">
             <h2 class="sub-title">Welsh Corgi</h2>
