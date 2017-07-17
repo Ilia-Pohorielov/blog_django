@@ -1,18 +1,19 @@
 <!DOCTYPE html>
+{% load staticfiles %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Corgi</title>
-    <link rel="icon" href="img/favicon.ico">
-    <link rel="stylesheet" href="css/style.css">
-    <script src="js/script.js"></script>
+    <link rel="icon" href="{% static 'img/favicon.ico' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="{% static 'js/script.js' %}"></script>
 </head>
 <body>
 <header>
     <div class="wrap">
         <div class="logo-header">
-            <a href="index.html"><img src="img/logo-2.png" alt="Logo"></a>
+            <a href="homepage.html"><img src="../../static/img/logo-2.png" alt="Logo"></a>
         </div>
         <div class="header-menu">
             <div class="hamburger">
@@ -60,21 +61,6 @@
     <a href="#anchor-title" class="anchor">Anchor</a>
 </header>
 <main>
-    <div class="blogs">
-        {% for post in posts %}
-            <div class="blog">
-                <div class="publish">
-                    {{ post.published_date }}
-                </div>
-                <div class="title">
-                    {{post.title}}
-                </div>
-                <div class="description">
-                    {{post.text}}
-                </div>
-            </div>
-        {% endfor %}
-    </div>
     <div class="wrap">
         <div class="block-description" id="anchor-title">
             <h2 class="sub-title">Welsh Corgi</h2>
@@ -107,42 +93,20 @@
     <div class="block-blog">
         <h2 class="sub-title">Our Blog</h2>
         <div class="wrap">
+            {% for post in posts %}
             <div class="blog-item">
                 <div class="left-group">
                     <a href="inner_blog.html">
-                        <span class="thumb-blog"><img src="img/corgi-6.jpg" alt="blog"></span>
-                        <span class="blog-title">Lorem ipsum.</span>
+                        <span class="thumb-blog"><img src="../../static/img/corgi-6.jpg" alt="blog"></span>
+                        <span class="blog-title">{{post.title}}</span>
                     </a>
                 </div>
                 <div class="right-group">
-                    <span class="blog-date">April 23.04.2017</span>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores aspernatur consectetur ea ex, hic id illo iure libero minima modi necessitatibus perspiciatis porro quam quasi qui quia, quisquam repellendus tempore?</p>
+                    <span class="blog-date">{{ post.published_date }}</span>
+                    <p>{{post.text}}</p>
                 </div>
             </div>
-            <div class="blog-item">
-                <div class="left-group">
-                    <a href="#">
-                        <span class="thumb-blog"><img src="img/corgi-5.jpg" alt="Blog"></span>
-                        <span class="blog-title">Lorem ipsum.</span>
-                    </a>
-                </div>
-                <div class="right-group">
-                    <span class="blog-date">April 23.04.2017</span>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores aspernatur consectetur ea ex, hic id illo iure libero minima modi necessitatibus perspiciatis porro quam quasi qui quia, quisquam repellendus tempore?</p>
-                </div>
-            </div>
-            <div class="blog-item">
-                <div class="left-group">
-                    <a href="#">
-                        <span class="thumb-blog"><img src="img/corgi-4.jpg" alt="Blog"></span>
-                        <span class="blog-title">Lorem ipsum.</span>
-                    </a>
-                </div>
-                <div class="right-group">
-                    <span class="blog-date">April 23.04.2017</span>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores aspernatur consectetur ea ex, hic id illo iure libero minima modi necessitatibus perspiciatis porro quam quasi qui quia, quisquam repellendus tempore?</p>
-                </div>
-            </div>
+            {% endfor %}
         </div>
         <a href="blog.html" class="btn-blog" target="_blank">Перейти на блоги</a>
     </div>
@@ -182,7 +146,7 @@
     <div class="wrap">
         <div class="block-info">
             <div class="logo-footer">
-                <a href="index.html"><img src="img/logo.png" alt="logo-footer"></a>
+                <a href="index.html"><img src="../../static/img/logo.png" alt="logo-footer"></a>
             </div>
             <div class="contact">
                 <a href="mailto:corgilove@test.ua">Email: corgilove@test.ua</a>
