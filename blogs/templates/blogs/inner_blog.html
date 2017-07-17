@@ -1,0 +1,17 @@
+{% extends 'blogs/base.html' %}
+{% block content %}
+  <div class="inner-blog">
+    <div class="wrap">
+      <div class="image-blog">
+        <img src="../../static/img/corgi-3.jpg" alt="">
+      </div>
+      <div class="blog-content">
+        <h2 class="sub-title">{{ post.title }}</h2>
+          {% if post.published_date %}
+        <span class="blog-date">{{ post.published_date }}</span>
+          {% endif %}
+        <p>{{ post.text }}</p>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
