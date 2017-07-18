@@ -12,6 +12,18 @@
           {% endif %}
         <p>{{ post.text }}</p>
       </div>
+      <div class="block-comments">
+        {% for comment in comments %}
+        <div class="comment">
+          {{ comment.body }}
+        </div>
+        {% endfor %}
+      </div>
+      <form action="{% url 'comment_create' pk=post.pk %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Отправить</button>
+      </form>
     </div>
   </div>
 {% endblock content %}
