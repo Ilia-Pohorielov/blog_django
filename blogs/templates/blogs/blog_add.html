@@ -1,10 +1,16 @@
 {% extends 'blogs/base.html' %}
 {% block content %}
+    {% if request.user.is_authenticated %}
     <div class="wrap">
-        <form action="" method="post">
+        <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="btn">Send</button>
         </form>
     </div>
+        {% else %}
+        <div class="help">
+        <h2 class="sub-title">Что-бы оставлять посты, <a href="{% url 'register' %}">Зарегестрируйтесь</a>, если у вас есть учётная запись, то<a href="{% url 'login' %}">войдите</a>:</h2>
+        </div>
+    {% endif %}
 {% endblock content %}

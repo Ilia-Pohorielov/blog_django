@@ -23,36 +23,16 @@
             </div>
             <ul>
                 <li><a href="{% url 'post_list' %}">Home</a></li>
-                <li><a href="#">Welsh Corgi</a>
-                    <ul>
-                        <li><a href="#">Cardigan</a></li>
-                        <li><a href="#">Pembroke</a></li>
-                    </ul>
-                </li>
+                <li><a href="#">Welsh Corgi</a></li>
                 <li><a href="blog.html">Blog</a></li>
-                <li><a href="#">History</a></li>
-                <li><a href="#">Contact</a></li>
-                <li>
-                    <a href="#">Войти</a>
-                    <div class="login">
-                        <form action="">
-                            <div class="log">
-                                <div class="email">
-                                    <input type="email" id="email-log" placeholder="Введите Email">
-                                </div>
-                                <div class="password">
-                                    <input type="password" id="password-log" placeholder="Введите Пароль">
-                                </div>
-                            </div>
-                            <div class="log-in">
-                                <button type="submit" id="btn-login">Войти</button>
-                            </div>
-                            <div class="register">
-                                <a href="register_page.html#">Зарегестрироваться</a>
-                            </div>
-                        </form>
-                    </div>
-                </li>
+                {% if request.user.is_authenticated != 1 %}
+                    <li><a href="{% url 'register' %}">Зарегестрироваться</a></li>
+                    <li><a href="{% url 'login' %}">Войти</a></li>
+                {% endif %}
+                {% if request.user.is_authenticated %}
+                    <li><a href="#">Добро пожаловать {{ request.user }}</a></li>
+                    <li><a href="{% url 'logout' %}">Выйти</a></li>
+                {% endif %}
             </ul>
         </div>
     </div>
