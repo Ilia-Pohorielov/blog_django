@@ -2,6 +2,7 @@
 {% block content %}
   <div class="inner-blog">
     <div class="wrap">
+    <div class="blog-{{ post.pk }} clearfix">
       <div class="image-blog">
         <img src="{{ post.image.url }}" alt="{{ post.title }}">
       </div>
@@ -12,19 +13,25 @@
           {% endif %}
         <p>{{ post.text }}</p>
       </div>
+    </div>
+    <h3 class="title-com">Комментарии:</h3>
       <div class="block-comments">
-        {% for comment in comments %}
-            <div class="author"> {{ comment.author }}</div>
-        <div class="comment">
-          {{ comment.body }}
+      {% for comment in comments %}
+        <div class="comments">
+            <div class="author">{{ comment.author }}:</div>
+            <div class="comment"> {{ comment.body }} </div>
         </div>
-        {% endfor %}
+      {% endfor %}
       </div>
+    <div class="add-comment">
       <form action="{% url 'comment_create' pk=post.pk %}" method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Отправить</button>
+          <div class="submit">
+              <button type="submit">Отправить</button>
+          </div>
       </form>
+    </div>
     </div>
   </div>
 {% endblock content %}

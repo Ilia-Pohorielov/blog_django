@@ -9,19 +9,23 @@
                 <a href="{% url 'post_detail' pk=post.pk %}">
                     <span class="thumb-blog"><img src="{{ post.image.url }}" alt="{{ post.title }}"></span>
                     <span class="blog-title">{{post.title}}</span>
-                    <span>{{ post.comments.count }}</span>
                 </a>
+                <span class="comment-count">{{ post.comments.count }}</span>
             </div>
             <div class="right-group">
                 {% if post.published_date %}
-                <span class="blog-date">{{ post.published_date }}</span>
+                    <span class="blog-date">{{ post.published_date }}</span>
                 {% endif %}
-                <span class="author">{{ post.author }}</span>
+                <div class="info-item">
+                    <span class="author">Автор: <b>{{ post.author }}</b></span>
+                    <div class="user-set">
+                        {% if request.user == post.author %}
+                            <a href="{% url 'post_edit' pk=post.pk %}" class="edit" title="Редактировать"></a>
+                            <a href="{% url 'post_delete' pk=post.pk %}" class="delete" title="Удалить"></a>
+                        {% endif %}
+                    </div>
+                 </div>
                 <p>{{post.text}}</p>
-            {% if request.user == post.author %}
-                <a href="{% url 'post_edit' pk=post.pk %}">Редактировать</a>
-                <a href="{% url 'post_delete' pk=post.pk %}">Delete</a>
-            {% endif %}
             </div>
         </div>
         {% endfor %}
