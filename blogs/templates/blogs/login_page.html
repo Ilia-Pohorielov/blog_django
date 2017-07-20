@@ -2,18 +2,21 @@
 {% block content %}
 <div class="wrap">
     <div class="login">
+        <h2 class="sub-title">Вход</h2>
         <form action="" method="post">
             {% csrf_token %}
             <div class="log">
                 <div class="username">
-                    <input type="text" name="username" placeholder="Введите логин">
+                    <label for="id_username">Введите логин</label>
+                    <input type="text" name="username" id="id_username" placeholder="Введите логин">
                 </div>
                 <div class="password">
-                    <input type="password" name="password" placeholder="Введите Пароль">
+                    <label for="id_password">Введите Пароль</label>
+                    <input type="password" name="password" id="id_password" placeholder="Введите Пароль">
                 </div>
             </div>
-            <div class="log-in">
-                <button type="submit" id="btn-login" style="color: #000">Войти</button>
+            <div class="submit">
+                <button type="submit" id="btn-login">Войти</button>
             </div>
         </form>
     </div>

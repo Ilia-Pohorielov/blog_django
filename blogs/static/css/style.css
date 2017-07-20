@@ -2,6 +2,16 @@ body,html {
     width: 100%;
     height: 100%;
 }
+@font-face {
+font-family: 'fontello';
+ src: url('../font/fontello.eot');
+ src: url('../font/fontello.eot') format('embedded-opentype'),
+      url('../font/fontello.woff') format('woff'),
+      url('../font/fontello.ttf') format('truetype'),
+      url('../font/fontello.svg') format('svg');
+font-weight: normal;
+font-style: normal;
+}
 body {
     margin: 0;
     padding: 0;
@@ -30,6 +40,8 @@ img {
 }
 header {
     position: relative;
+    box-shadow: 0 1px 2px #333;
+    margin-bottom: 40px;
 }
 header .wrap {
     display: flex;
@@ -40,8 +52,8 @@ header .wrap {
     right: 0;
 }
 .bg-image{
-    height: 100vh;
-    background: url("../img/bg-image.jpg")no-repeat 50% 0;
+    height: 50vh;
+    background: url("../img/bg-image.jpg")no-repeat 50% 50%;
     background-size: cover;
 }
 .title {
@@ -160,6 +172,7 @@ header .wrap {
     font-weight: bold;
     transition: all .3s ease;
     position: relative;
+    text-shadow: 0 2px 4px #333;
 }
 .header-menu ul li a:hover {
     color: #ee7729;
@@ -433,6 +446,8 @@ form .reg > div input:focus {
     width: 268px;
     margin-right: 25px;
     border-radius: 2px;
+    box-shadow: 0 4px 8px #333;
+    line-height: 0;
 }
 .blog-item .left-group a {
     text-decoration: none;
@@ -474,21 +489,21 @@ form .reg > div input:focus {
     color: #333;
     font-size: 20px;
 }
-.subscription-form form {
+form {
     max-width: 500px;
     margin: 0 auto;
     text-align: left;
 }
-.subscription-form form > div {
+form > div {
     margin-bottom: 10px;
 }
-.subscription-form label,
-.subscription-form label{
+label{
     display: block;
-    color: #fff;
+    color: #333;
     margin-bottom: 5px;
 }
-.subscription-form input {
+textarea,
+input {
     width: 100%;
     background: #fff;
     border-radius: 2px;
@@ -497,31 +512,39 @@ form .reg > div input:focus {
     padding: 0 5px;
     transition: all .3s ease;
 }
-.subscription-form input:active,
-.subscription-form input:focus {
+textarea {
+    height: 300px;
+    padding-top: 10px;
+    font-size: 16px;
+}
+input:active,
+input:focus {
     outline: none;
-    transform: scale(1.1);
+    transform: scale(1.12);
 }
-.subscription-form .submit {
-    text-align: center;
+.submit {
+    text-align: left;
 }
-.subscription-form .submit button {
+.submit button {
     background: transparent;
     border: 2px solid #333;
     text-transform: uppercase;
     font-weight: bold;
-    color: #fff;
+    color: #000;
     cursor: pointer;
     position: relative;
     transition: all .3s ease;
     padding: 10px 50px;
 }
-.subscription-form .submit button:hover {
-    box-shadow: inset 200px 0 0 #fff;
+.submit button:focus {
+    outline: none;
 }
-.subscription-form .submit button:hover {
-    color: #ee7729;
-    border-color: #333;
+.submit button:hover {
+    background: #000000;
+}
+.submit button:hover {
+    border-color: #000;
+    color: #fff;
 }
 main {
     flex: 1 0 auto;
@@ -780,4 +803,143 @@ footer {
 .btn-reg {
     cursor: pointer;
     border: none;
+}
+.author {
+    font-size: 18px;
+    display: block;
+    color: #ee7729;
+    text-transform: capitalize;
+}
+.author b {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+.delete,.edit {
+    text-decoration: none;
+    display: inline-block;
+    vertical-align: middle;
+}
+.delete:before,
+.edit:before {
+    content: '\e800';
+    font-size: 30px;
+    color: #333;
+    font-family: "fontello",sans-serif;
+    transition: all .3s ease;
+}
+.delete:before {
+    content: '\e801';
+    font-size: 25px;
+}
+.delete:hover::before,
+.edit:hover::before {
+    color: #ee7729;
+}
+.info-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.blog-item .left-group {
+    position: relative;
+}
+.blog-item .left-group .comment-count {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    display: block;
+    width: 50px;
+    height: 25px;
+    background: #ee7729;
+    border-radius: 2px;
+    color: #fff;
+    font-size: 16px;
+    line-height: 25px;
+    text-align: center;
+}
+.blog-item .left-group .comment-count:before {
+    content: '\f2c0';
+    font-family: "fontello",sans-serif;
+    margin-right: 10px;
+}
+input[type="file"] {
+    display: none;
+}
+label[for="id_image"] {
+    display: inline-block;
+    width: 300px;
+    height: 50px;
+    border-radius: 5px;
+    color: #333;
+    text-align: center;
+    line-height: 50px;
+    font-weight: bold;
+    border: 1px solid #ee7729;
+    text-transform: uppercase;
+    transition: all .3s ease;
+    cursor: pointer;
+}
+label[for="id_image"]:hover {
+    background: #ee7729;
+    color: #fff;
+}
+.block-comments,
+.add-comment {
+    clear: both;
+}
+.add-comment label[for="id_body"] {
+    display: none;
+}
+.add-comment textarea {
+    height: 100px;
+}
+.add-comment form {
+    margin: 0;
+}
+.block-comments {
+    max-width: 500px;
+}
+.block-comments .author {
+    margin-bottom: 5px;
+}
+.block-comments .comment {
+    font-size: 18px;
+    padding: 10px;
+    background: #eeeeee;
+    border-radius: 2px;
+    box-shadow: 0 1px 2px #333;
+}
+.comments {
+    margin-bottom: 10px;
+}
+.comments:last-child {
+    margin-bottom: 0;
+}
+.clearfix {
+    margin-bottom: 20px;
+}
+.clearfix:before,
+.clearfix:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+.register-page .password #id_password {
+    margin-bottom: 10px;
+}
+.register-page .submit button {
+    padding: 10px 0;
+}
+.login .log > div {
+    margin-bottom: 10px;
+}
+.title-com {
+    font-weight: bold;
+    font-size: 20px;
+    color: #333;
+    text-transform: capitalize;
+
 }

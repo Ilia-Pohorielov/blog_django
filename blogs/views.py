@@ -86,7 +86,6 @@ def register(request):
         User(email=email)
         if password == password_r:
             user.set_password(password)
-            return ValidationError('Пароли не совпадают', code='password')
         user.save()
         return redirect('login')
     return render(
