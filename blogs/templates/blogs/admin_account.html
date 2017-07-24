@@ -1,0 +1,31 @@
+{% extends 'blogs/base.html' %}
+{% block content %}
+    <div class="wrap">
+    <div class="publish-blog">
+        {% for post in posts %}
+            <div class="blog-item">
+                <div class="left-group">
+                    <a href="{% url 'post_detail' pk=post.pk %}">
+                        <span class="thumb-blog"><img src="{{ post.image.url }}" alt="{{ post.title }}"></span>
+                        <span class="blog-title">{{post.title}}</span>
+                    </a>
+                    <span class="comment-count">{{ post.comments.count }}</span>
+                </div>
+                <div class="right-group">
+                    {% if post.published_date %}
+                        <span class="blog-date">{{ post.published_date }}</span>
+                    {% endif %}
+                    <div class="info-item">
+                        <span class="author">Автор: <b>{{ post.author }}</b></span>
+                        <div class="user-set">
+                            <a href="{% url 'post_edit' pk=post.pk %}" class="edit" title="Редактировать"></a>
+                            <a href="{% url 'post_delete' pk=post.pk %}" class="delete" title="Удалить"></a>
+                        </div>
+                     </div>
+                    <p>{{post.text}}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    </div>
+{% endblock content %}
