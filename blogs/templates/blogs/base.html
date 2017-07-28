@@ -7,6 +7,7 @@
     <title>Corgi</title>
     <link rel="icon" href="{% static 'img/favicon.ico' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="{% static 'js/script.js' %}"></script>
 </head>
 <body>
@@ -30,7 +31,7 @@
                     <li><a href="{% url 'login' %}">Войти</a></li>
                 {% endif %}
                 {% if request.user.is_authenticated %}
-                    <li><a href="{% url 'user_page' pk=user.pk%}">Добро пожаловать {{ request.user }}</a></li>
+                    <li><a href="{% url 'update_profile' pk=user.pk%}">Добро пожаловать {{ request.user }}</a></li>
                     <li><a href="{% url 'logout' %}">Выйти</a></li>
                 {% endif %}
                 {% if request.user.is_superuser %}

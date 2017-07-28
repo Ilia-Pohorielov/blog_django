@@ -19,6 +19,7 @@
                         <div class="info-item">
                             <span class="author">Автор: <b>{{ post.author }}</b></span>
                             <div class="user-set">
+                               <a href="{% url 'add_remove_bookmark' pk=post.pk %}" class="favorite" title="Избранное" data-favorite="{{ favorite.count }}"></a>
                                 {% if request.user == post.author %}
                                     <a href="{% url 'post_edit' pk=post.pk %}" class="edit" title="Редактировать"></a>
                                     <a href="{% url 'post_delete' pk=post.pk %}" class="delete" title="Удалить"></a>
@@ -30,6 +31,6 @@
                 </div>
         {% endfor %}
     </div>
-    <a href="{% url 'post_new' %}" class="btn-blog" target="_blank">Добавить запись</a>
+    <a href="{% url 'post_new' %}" class="btn-blog" target="_blank">Добавить статью</a>
 </div>
 {% endblock content %}

@@ -815,23 +815,32 @@ footer {
     font-weight: bold;
     color: #333;
 }
-.delete,.edit {
+.favorite, .delete,.edit {
     text-decoration: none;
     display: inline-block;
     vertical-align: middle;
 }
+.favorite:before,
 .delete:before,
 .edit:before {
-    content: '\e800';
+    content: '\e802';
     font-size: 30px;
     color: #333;
     font-family: "fontello",sans-serif;
     transition: all .3s ease;
 }
+.favorite.active:before {
+    color: #ee7729;
+}
 .delete:before {
     content: '\e801';
     font-size: 25px;
 }
+.favorite:before {
+    content: '\e800';
+    font-size: 25px;
+}
+.favorite:hover::before,
 .delete:hover::before,
 .edit:hover::before {
     color: #ee7729;
@@ -861,7 +870,7 @@ footer {
     text-align: center;
 }
 .blog-item .left-group .comment-count:before {
-    content: '\f2c0';
+    content: '\e803';
     font-family: "fontello",sans-serif;
     margin-right: 10px;
 }
@@ -942,4 +951,89 @@ label[for="id_image"]:hover {
     color: #333;
     text-transform: capitalize;
 
+}
+.profile {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.left-sidebar {
+    width: 30%;
+    background: #eeeeee;
+    border-radius: 5px;
+    padding: 15px 20px;
+}
+.form-profile {
+    width: 65%;
+}
+.form-profile form {
+    max-width: none;
+    margin: 0;
+}
+a {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+    text-transform: capitalize;
+}
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+ul > li {
+    margin-bottom: 5px;
+}
+.left-sidebar ul li {
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    transition: all .3s ease;
+}
+.left-sidebar ul li:hover,
+.left-sidebar ul li:focus {
+    color: #ee7729;
+}
+.left-sidebar ul li.active {
+    color: #ee7729;
+}
+.left-sidebar ul li .second-level li {
+    font-weight: normal;
+    font-size: 16px;
+    position: relative;
+    padding-left: 10px;
+    margin-left: 20px;
+    margin-top: 10px;
+}
+.left-sidebar ul li .second-level li a {
+    text-transform: lowercase;
+    color: #000;
+    font-weight: 500;
+
+}
+.left-sidebar ul li .second-level li a:hover {
+    color: #ee7729;
+}
+.left-sidebar ul li .second-level li:before {
+    content: '';
+    display: block;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #ee7729;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    margin-top: -2.5px;
+}
+.left-sidebar ul li .second-level {
+    max-height: 0;
+    visibility: hidden;
+    opacity: 0;
+    transition: all .3s ease;
+}
+.left-sidebar ul li.active .second-level {
+    max-height: 1000px;
+    visibility: visible;
+    opacity: 1;
 }

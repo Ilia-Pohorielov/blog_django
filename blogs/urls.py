@@ -1,5 +1,6 @@
 from django.conf.urls import url
 from . import views
+
 urlpatterns = [
     url(r'^$', views.post_list, name='post_list'),
     url(r'^register/$', views.register, name='register'),
@@ -11,5 +12,6 @@ urlpatterns = [
     url(r'^post/(?P<pk>[0-9]+)/edit/$', views.post_edit, name='post_edit'),
     url(r'^post/(?P<pk>[0-9]+)/comment_create/$', views.comment_create, name='comment_create'),
     url(r'^post/(?P<pk>[0-9]+)/post_delete/$', views.post_delete, name='post_delete'),
-    url(r'^user/(?P<pk>[0-9]+)/$', views.user_page, name='user_page'),
+    url(r'^profile/(?P<pk>[0-9]+)/$', views.update_profile, name='update_profile'),
+    url(r'^post/(?P<pk>\d+)/favorite/$', views.add_remove_bookmark, name='add_remove_bookmark'),
 ]

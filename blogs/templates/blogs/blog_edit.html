@@ -4,6 +4,11 @@
     <h2 class="sub-title">Edit Blog</h2>
     <form action="#" method="post" enctype="multipart/form-data">
         {% csrf_token %}
+        {% if request.user.is_superuser %}
+            <div class="status-post">
+                {{ form.status }}
+            </div>
+        {% endif %}
         <div class="title-input">
             <label for="{{ form.title.id_for_label }}">Заголовок поста</label>
             <input type="text" name="title" id="{{ form.title.id_for_label }}" value="{{ form.title.value }}">

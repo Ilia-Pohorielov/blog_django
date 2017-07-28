@@ -1,40 +1,69 @@
 {% extends 'blogs/base.html' %}
 {% block content %}
-    <div class="wrap">
-    {{ user.username }}
-    <div class="left-sidebar">
-        <ul>
-            <li><a href="">Опубликованные</a></li>
-            <li><a href="">Ожидают публикации</a></li>
-        </ul>
-    </div>
-        {% for post in posts %}
-            {% if post.status == 'publish' %}
-            <div class="blog-item">
-                <div class="left-group">
-                    <a href="{% url 'post_detail' pk=post.pk %}">
-                        <span class="thumb-blog"><img src="{{ post.image.url }}" alt="{{ post.title }}"></span>
-                        <span class="blog-title">{{post.title}}</span>
-                    </a>
-                    <span class="comment-count">{{ post.comments.count }}</span>
-                </div>
-                <div class="right-group">
-                    {% if post.published_date %}
-                        <span class="blog-date">{{ post.published_date }}</span>
-                    {% endif %}
-                    <div class="info-item">
-                        <span class="author">Автор: <b>{{ post.author }}</b></span>
-                        <div class="user-set">
+<h2 class="sub-title">Лмчный кабинет</h2>
+<div class="wrap profile">
+    <aside class="left-sidebar">
+        <ul class="first-level">
+            <li>Опубликованные
+                <ul class="second-level">
+                    {% for post in posts %}
+                        {% if post.status == 'publish' %}
                             {% if request.user == post.author %}
-                                <a href="{% url 'post_edit' pk=post.pk %}" class="edit" title="Редактировать"></a>
-                                <a href="{% url 'post_delete' pk=post.pk %}" class="delete" title="Удалить"></a>
+                                <li><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></li>
                             {% endif %}
-                        </div>
-                     </div>
-                    <p>{{post.text}}</p>
-                </div>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </li>
+                <li>Ожидают публикации
+                    <ul class="second-level">
+                        {% for post in posts %}
+                            {% if post.status == 'expectation' %}
+                                {% if request.user == post.author %}
+                                    <li><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></li>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </li>
+            <li>Избранное
+                <ul class="second-level">
+                    {% for bookmark in bookmarks %}
+                        {% if request.user == bookmark.user %}
+                            <li><a href="{% url 'post_detail' pk=bookmark.profile.id%}">{{ bookmark.profile.title }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </li>
+        </ul>
+    </aside>
+    <div class="form-profile">
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="first-name">
+                <label for="{{ user_form.first_name.id_for_label }}">Введите Имя</label>
+                <input type="text" name="first_name" id="{{ user_form.first_name.id_for_label }}" value="{{ user_form.first_name.value }}" placeholder="Введите Имя">
             </div>
-            {% endif %}
-        {% endfor %}
+            <div class="last-name">
+                <label for="{{ user_form.last_name.id_for_label }}">Введите Фамилию</label>
+                <input type="text" name="last_name" id="{{ user_form.last_name.id_for_label }}" value="{{ user_form.last_name.value }}" placeholder="Введите Фамилию">
+            </div>
+            <div class="Email">
+                <label for="{{ user_form.email.id_for_label }}">Введите Email</label>
+                <input type="text" name="email" id="{{ user_form.email.id_for_label }}" value="{{ user_form.email.value }}" placeholder="Введите Email">
+            </div>
+            <div class="Phone">
+                <label for="{{ profile_form.phone.id_for_label }}">Введите телефон</label>
+                <input type="text" name="phone" id="{{ profile_form.phone.id_for_label }}" value="{{ profile_form.phone.value }}" placeholder="Введите Phone">
+            </div>
+            <div class="About">
+                <label for="{{ profile_form.about.id_for_label }}">О себе</label>
+                <textarea name="about" id="{{ profile_form.about.id_for_label }}" placeholder="О себе">{{ profile_form.about.value }}</textarea>
+            </div>
+            <div class="submit">
+                <button type="submit">Редактировать</button>
+            </div>
+        </form>
     </div>
+</div>
 {% endblock content %}

@@ -1,7 +1,8 @@
 from django.db import models
 from django.utils import timezone
-from django import forms
-from django.contrib.auth.models import User, UserManager
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 class Post(models.Model):
     STATUS_PUBLISH = (
@@ -24,6 +25,7 @@ class Post(models.Model):
         blank=True,
         null=True
     )
+
     def publish(self):
         self.published_date = timezone.now()
         self.save()
@@ -39,3 +41,23 @@ class Comment(models.Model):
     published_date = models.DateTimeField(
             blank=True, null=True)
     author = models.ForeignKey('auth.User')
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    about = models.TextField(max_length=500, blank=True, null=True)
+    phone = models.IntegerField(blank=True, default=0)
+
+    @receiver(post_save, sender=User)
+    def create_user_profile(sender, instance, created, **kwargs):
+        if created:
+            UserProfile.objects.create(user=instance)
+
+    @receiver(post_save, sender=User)
+    def save_user_profile(sender, instance, **kwargs):
+        instance.userprofile.save()
+
+
+class Favorite(models.Model):
+    user = models.ForeignKey(User)
+    profile = models.ForeignKey(Post)
+
