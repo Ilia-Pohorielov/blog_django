@@ -1,15 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from .models import Post, Favorite
-from .forms import PostForm, CommentForm, RegisterForm, UserForm, ProfileForm
+from .forms import PostForm, RegisterForm, UserForm, ProfileForm
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login as login_user, logout as logout_user
-from django.http import JsonResponse
-
-from django.contrib import auth
-from django.http import HttpResponse
-from django.views import View
-# Create your views here.
 
 def post_list(request):
     posts = Post.objects.filter(status='publish')
@@ -36,26 +30,13 @@ def user_page(request, pk):
 
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
-    comment_form = CommentForm()
     return render(
         request,
         'blogs/inner_blog.html',
         {
             'post': post,
-            'form': comment_form,
-            'comments': post.comments.all(),
         }
     )
-
-def comment_create(request, pk):
-    post = get_object_or_404(Post, pk=pk)
-    form = CommentForm(request.POST)
-    if form.is_valid():
-        comment = form.instance
-        comment.author = request.user
-        comment.post = post
-        comment.save()
-    return redirect('post_detail', pk=post.pk )
 
 def admin_account(request):
     posts = Post.objects.filter(status='expectation')

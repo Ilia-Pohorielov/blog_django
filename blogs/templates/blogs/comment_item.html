@@ -1,0 +1,6 @@
+<div style="margin: 0 0 20px {{ comment.html_level }}%" id="comment{{ comment.id }}">
+    <a href="{{ comment.user.get_absolute_url }}">{{ comment.user.username }}</a>
+    &nbsp;&nbsp;<small>{{ comment.date|date:"d.m.Y G:i" }}</small> <a href="{{ comment.get_absolute_url }}">#</a>
+    <div>{{ comment.text }}</div>
+    <a href="#" onclick="return reply_comment({{ comment.id }});">ответить</a>
+</div>

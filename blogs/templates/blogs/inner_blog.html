@@ -17,14 +17,11 @@
     <h3 class="title-com">Комментарии:</h3>
       <div class="block-comments">
       {% for comment in comments %}
-        <div class="comments">
-            <div class="author">{{ comment.author }}:</div>
-            <div class="comment"> {{ comment.body }} </div>
-        </div>
+            {% include "blogs/comment_item.html" %}
       {% endfor %}
       </div>
     <div class="add-comment">
-      <form action="{% url 'comment_create' pk=post.pk %}" method="post">
+      <form action="." method="post">
         {% csrf_token %}
         {{ form.as_p }}
           <div class="submit">
